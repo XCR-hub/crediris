@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private routes
+Disallow: /admin/
+Disallow: /profile/
+Disallow: /loan/
+Disallow: /contract/
+
+# Sitemaps
+Sitemap: https://www.crediris.fr/sitemap.xml
