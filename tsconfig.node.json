@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "composite": true,
+    "emitDeclarationOnly": false,
     "module": "ESNext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
