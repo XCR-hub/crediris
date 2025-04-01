@@ -1,26 +1,25 @@
-export interface SEOProps {
-  title?: string;
-  description?: string;
-  url?: string;
-  image?: string;
-}
+from git import Repo
+from datetime import datetime
+import os
 
-export function generateMetaTags({
-  title = "Crediris - Assurance emprunteur en ligne",
-  description = "Simulez et souscrivez votre assurance emprunteur 100% en ligne avec Crediris. Rapide, sécurisé et sans engagement.",
-  url = "https://www.crediris.com",
-  image = "https://www.crediris.com/og-image.jpg",
-}: SEOProps) {
-  return `
-    <title>${title}</title>
-    <meta name="description" content="${description}" />
-    <meta property="og:title" content="${title}" />
-    <meta property="og:description" content="${description}" />
-    <meta property="og:url" content="${url}" />
-    <meta property="og:image" content="${image}" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${title}" />
-    <meta name="twitter:description" content="${description}" />
-    <meta name="twitter:image" content="${image}" />
-  `;
-}
+# Chemin vers le dossier du dépôt
+REPO_PATH = os.getcwd()
+
+# Initialisation du dépôt
+repo = Repo(REPO_PATH)
+
+# Ajout de toutes les modifications
+print("📝 Ajout des fichiers modifiés...")
+repo.git.add(A=True)
+
+# Création du commit
+message = f"🚀 Correction du fichier seo.ts pour déploiement Vercel - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+print(f"🔒 Commit en cours : {message}")
+repo.index.commit(message)
+
+# Push vers main
+print("📤 Push vers GitHub...")
+origin = repo.remote(name="origin")
+origin.push(refspec="HEAD:main")
+
+print("✅ Push effectué avec succès ! Vérifie le déploiement sur Vercel.")
