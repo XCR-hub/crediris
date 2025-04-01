@@ -1,40 +1,26 @@
-import { Helmet } from 'react-helmet-async';
-
-interface SEOProps {
-  title: string;
-  description: string;
-  canonical?: string;
-  schema?: object;
+export interface SEOProps {
+  title?: string;
+  description?: string;
+  url?: string;
+  image?: string;
 }
 
-export function SEO({ title, description, canonical, schema }: SEOProps) {
-  const fullTitle = `${title} | CREDIRIS - Assurance emprunteur en ligne`;
-
-  return (
-    <Helmet>
-      <title>{fullTitle}</title>
-      <meta name="description" content={description} />
-      
-      {/* Open Graph */}
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="CREDIRIS" />
-      
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      
-      {/* Canonical */}
-      {canonical && <link rel="canonical" href={canonical} />}
-      
-      {/* Schema.org */}
-      {schema && (
-        <script type="application/ld+json">
-          {JSON.stringify(schema)}
-        </script>
-      )}
-    </Helmet>
-  );
+export function generateMetaTags({
+  title = "Crediris - Assurance emprunteur en ligne",
+  description = "Simulez et souscrivez votre assurance emprunteur 100% en ligne avec Crediris. Rapide, sécurisé et sans engagement.",
+  url = "https://www.crediris.com",
+  image = "https://www.crediris.com/og-image.jpg",
+}: SEOProps) {
+  return `
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${description}" />
+    <meta property="og:url" content="${url}" />
+    <meta property="og:image" content="${image}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${description}" />
+    <meta name="twitter:image" content="${image}" />
+  `;
 }
