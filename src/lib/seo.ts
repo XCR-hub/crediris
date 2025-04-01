@@ -1,25 +1,29 @@
-from git import Repo
-from datetime import datetime
-import os
+export const siteConfig = {
+  title: "Crediris • Assurance Emprunteur 100% en ligne",
+  description:
+    "Simulez, comparez et souscrivez votre assurance emprunteur en ligne avec Crediris. Gain de temps, économies garanties, couverture optimale.",
+  keywords: [
+    "assurance emprunteur",
+    "simulation assurance",
+    "assurance prêt immobilier",
+    "souscription en ligne",
+    "devis assurance emprunteur",
+  ],
+  url: "https://www.crediris.com",
+  image: "https://www.crediris.com/og-image.jpg",
+};
 
-# Chemin vers le dossier du dépôt
-REPO_PATH = os.getcwd()
-
-# Initialisation du dépôt
-repo = Repo(REPO_PATH)
-
-# Ajout de toutes les modifications
-print("📝 Ajout des fichiers modifiés...")
-repo.git.add(A=True)
-
-# Création du commit
-message = f"🚀 Correction du fichier seo.ts pour déploiement Vercel - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
-print(f"🔒 Commit en cours : {message}")
-repo.index.commit(message)
-
-# Push vers main
-print("📤 Push vers GitHub...")
-origin = repo.remote(name="origin")
-origin.push(refspec="HEAD:main")
-
-print("✅ Push effectué avec succès ! Vérifie le déploiement sur Vercel.")
+export const defaultMetaTags = {
+  title: siteConfig.title,
+  description: siteConfig.description,
+  keywords: siteConfig.keywords.join(", "),
+  "og:type": "website",
+  "og:title": siteConfig.title,
+  "og:description": siteConfig.description,
+  "og:image": siteConfig.image,
+  "og:url": siteConfig.url,
+  "twitter:card": "summary_large_image",
+  "twitter:title": siteConfig.title,
+  "twitter:description": siteConfig.description,
+  "twitter:image": siteConfig.image,
+};
