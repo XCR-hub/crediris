@@ -1,29 +1,29 @@
-export const siteConfig = {
-  title: "Crediris • Assurance Emprunteur 100% en ligne",
-  description:
-    "Simulez, comparez et souscrivez votre assurance emprunteur en ligne avec Crediris. Gain de temps, économies garanties, couverture optimale.",
-  keywords: [
-    "assurance emprunteur",
-    "simulation assurance",
-    "assurance prêt immobilier",
-    "souscription en ligne",
-    "devis assurance emprunteur",
-  ],
-  url: "https://www.crediris.com",
-  image: "https://www.crediris.com/og-image.jpg",
-};
+// src/lib/seo.ts
 
-export const defaultMetaTags = {
-  title: siteConfig.title,
-  description: siteConfig.description,
-  keywords: siteConfig.keywords.join(", "),
-  "og:type": "website",
-  "og:title": siteConfig.title,
-  "og:description": siteConfig.description,
-  "og:image": siteConfig.image,
-  "og:url": siteConfig.url,
-  "twitter:card": "summary_large_image",
-  "twitter:title": siteConfig.title,
-  "twitter:description": siteConfig.description,
-  "twitter:image": siteConfig.image,
+export const seo = {
+  title: "Crediris - Assurance Emprunteur",
+  description:
+    "Obtenez votre assurance emprunteur en ligne, rapidement et au meilleur prix.",
+  openGraph: {
+    type: "website",
+    url: "https://www.crediris.fr",
+    title: "Crediris - Assurance Emprunteur",
+    description:
+      "Obtenez votre assurance emprunteur en ligne, rapidement et au meilleur prix.",
+    images: [
+      {
+        url: "/images/opengraph.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Crediris",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@CredirisFR",
+    title: "Crediris",
+    description: "Votre assurance emprunteur 100% digitale.",
+    image: "/images/twitter-card.jpg",
+  },
 };
