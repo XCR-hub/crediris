@@ -1,29 +1,41 @@
-from git import Repo
-import os
+from pathlib import Path
+from dotenv import dotenv_values
+import git
 
-# === CONFIGURATION À PERSONNALISER ===
-REPO_PATH = "C:/Users/TCERD/Documents/crediris"  # <-- Mets ici le chemin complet vers ton dossier cloné
-COMMIT_MESSAGE = "🚀 Auto-push Ultron: mise à jour complète"
-BRANCH = "main"
+print("🚀 Initialisation du push automatique...")
 
-def push_to_github():
-    print("🔍 Initialisation du dépôt local...")
-    repo = Repo(REPO_PATH)
+# Charger les variables d’environnement
+env_path = Path(".env")
+env = dotenv_values(dotenv_path=env_path)
 
-    if repo.is_dirty(untracked_files=True):
-        print("📦 Ajout de tous les fichiers modifiés/non suivis...")
-        repo.git.add(all=True)
+# Config depuis le .env
+repo_name = env.get("GITHUB_REPOSITORY")
+username = env.get("GITHUB_USERNAME")
+token = env.get("GITHUB_TOKEN")
 
-        print(f"📝 Commit avec message : {COMMIT_MESSAGE}")
-        repo.index.commit(COMMIT_MESSAGE)
+# URL distante GitHub avec token
+repo_url = f"https://{username}:{token}@github.com/{username}/{repo_name}.git"
 
-        print(f"🚀 Push vers la branche {BRANCH}...")
-        origin = repo.remote(name='origin')
-        origin.push(refspec=f"{BRANCH}:{BRANCH}")
+# Dossier du projet
+project_path = Path(".")
 
-        print("✅ Push réussi sur GitHub !")
-    else:
-        print("🔁 Aucun changement à pusher.")
+# Ouvrir ou init repo
+if not (project_path / ".git").exists():
+    print("🧱 Dépôt Git non initialisé. Initialisation...")
+    repo = git.Repo.init(project_path)
+    repo.create_remote("origin", repo_url)
+else:
+    repo = git.Repo(project_path)
+    if "origin" not in [r.name for r in repo.remotes]:
+        repo.create_remote("origin", repo_url)
 
-if __name__ == "__main__":
-    push_to_github()
+# Ajouter tous les fichiers
+repo.git.add(A=True)
+
+# Commit
+repo.index.commit("💥 Déploiement automatique Crediris")
+
+# Push vers main
+repo.remotes.origin.push(refspec="HEAD:main")
+
+print("✅ Push effectué avec succès sur GitHub.")
