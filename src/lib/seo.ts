@@ -1,4 +1,12 @@
 // src/lib/seo.ts
+export function generateMetaTags() {
+  return {
+    title: "Crediris",
+    description: "Simulation et souscription assurance emprunteur",
+    ogTitle: "Crediris",
+    ogDescription: "La meilleure assurance emprunteur en ligne",
+  };
+}
 
 export const seo = {
   title: "Crediris - Assurance Emprunteur",
